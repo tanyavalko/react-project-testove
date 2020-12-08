@@ -1,8 +1,8 @@
-import React from 'react';
-import './LeftHeader.css';
+import React from "react";
+import "./LeftHeader.css";
 
 const LeftHeader = (props) => {
-    return <div className='title'>Employees</div>
-}
+  return <div className="title">Employees</div>;
+};
 
 export default LeftHeader;

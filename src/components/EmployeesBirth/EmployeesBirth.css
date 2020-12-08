@@ -1,18 +1,18 @@
 ul {
-    padding-left: 18px;
+  padding-left: 18px;
 }
 
 ul li::before {
-    font-weight: bold; 
-    width: 2em; 
-  }
+  font-weight: bold;
+  width: 2em;
+}
 
 .right-content {
-    border-top: 1px solid grey;
-    padding-top: 20px;
-    font-size: 14px;
+  border-top: 1px solid grey;
+  padding-top: 20px;
+  font-size: 14px;
 }
 
 .elem {
-    width: 300px;
+  width: 300px;
 }
