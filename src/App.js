@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Employees from './components/Employees/Employees';
+import EmployeesBirth from './components/EmployeesBirth/EmployeesBirth';
+import LeftHeader from './components/LeftHeader/LeftHeader';
+import RightHeader from './components/RightHeader/RightHeader';
+import { useDispatch } from 'react-redux';
 
-function App() {
+const App = (props) => {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('https://yalantis-react-school-api.yalantis.com/api/task0/users')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          result = result.map(item => {
+            return {
+              ...item,
+              checked: false
+            }
+          });
+          // setIsLoaded(true);
+          dispatch({type: 'SET_USERS', users: result});
+          setItems(result);
+        },
+        (error) => {
+            setIsLoaded(true);
+            setError(error);
+        }
+      )
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-wrapper'>
+      <LeftHeader />
+      <RightHeader />
+      <Employees />
+      <EmployeesBirth />
     </div>
   );
 }
