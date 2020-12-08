@@ -17,6 +17,7 @@ const usersReducer = (state = initialState, action) => {
       );
       const users = [...state.users];
       users[findIndex] = action.user;
+      window['localStorage'].setItem('SAVED_ITEMS', JSON.stringify(users));
       return {
         ...state,
         users: users,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Employees from "./components/Employees/Employees";
 import EmployeesBirth from "./components/EmployeesBirth/EmployeesBirth";
@@ -6,14 +6,16 @@ import LeftHeader from "./components/LeftHeader/LeftHeader";
 import RightHeader from "./components/RightHeader/RightHeader";
 import { useDispatch } from "react-redux";
 
-const App = (props) => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://yalantis-react-school-api.yalantis.com/api/task0/users")
+    let savedUsers = window['localStorage'].getItem('SAVED_ITEMS');
+    const users = savedUsers ? JSON.parse(savedUsers) : [];
+    if (users?.length) {
+      dispatch({ type: "SET_USERS", users });
+    } else {
+      fetch("https://yalantis-react-school-api.yalantis.com/api/task0/users")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -24,13 +26,9 @@ const App = (props) => {
             };
           });
           dispatch({ type: "SET_USERS", users: result });
-          setItems(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
         }
       );
+    }
   }, [dispatch]);
 
   return (
