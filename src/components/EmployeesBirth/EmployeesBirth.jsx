@@ -21,23 +21,25 @@ const EmployeesBirth = () => {
   return (
     <div className="right-content">
       <div className="lists-wrapper">
-        {Object.entries(users).map(([key, value]) => (
-          <div className="elem">
-            <div className="elem-key">{value.length ? key : null}</div>
-            <div className="elem-value">
-              {value.map((item) => {
-                return item.checked ? (
-                  <ul>
-                    <li>
-                      {`${item.lastName} ${item.firstName} - `}
-                      {moment(item.dob).format("DD MMMM, YYYY") + " year"}
-                    </li>
-                  </ul>
-                ) : null;
-              })}
-            </div>
-          </div>
-        ))}
+        {Object.keys(users).length === 0
+          ? "No selected employees"
+          : Object.entries(users).map(([key, value]) => (
+              <div className="elem">
+                <div className="elem-key">{value.length ? key : null}</div>
+                <div className="elem-value">
+                  {value.map((item) => {
+                    return item.checked ? (
+                      <ul>
+                        <li>
+                          {`${item.lastName} ${item.firstName} - `}
+                          {moment(item.dob).format("DD MMMM, YYYY") + " year"}
+                        </li>
+                      </ul>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

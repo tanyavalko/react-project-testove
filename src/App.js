@@ -10,15 +10,14 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let savedUsers = window['localStorage'].getItem('SAVED_ITEMS');
+    let savedUsers = window["localStorage"].getItem("SAVED_ITEMS");
     const users = savedUsers ? JSON.parse(savedUsers) : [];
     if (users?.length) {
       dispatch({ type: "SET_USERS", users });
     } else {
       fetch("https://yalantis-react-school-api.yalantis.com/api/task0/users")
-      .then((res) => res.json())
-      .then(
-        (result) => {
+        .then((res) => res.json())
+        .then((result) => {
           result = result.map((item) => {
             return {
               ...item,
@@ -26,8 +25,7 @@ const App = () => {
             };
           });
           dispatch({ type: "SET_USERS", users: result });
-        }
-      );
+        });
     }
   }, [dispatch]);
 

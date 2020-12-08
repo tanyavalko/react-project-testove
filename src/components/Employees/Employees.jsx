@@ -37,7 +37,11 @@ const Employees = () => {
             {value.map((item) => (
               <div>
                 {`${item.lastName} ${item.firstName}`}
-                <input type="checkbox" checked={item.checked} onClick={() => changeStatusUser(item)} />
+                <input
+                  type="checkbox"
+                  checked={item.checked}
+                  onClick={() => changeStatusUser(item)}
+                />
               </div>
             ))}
           </div>
